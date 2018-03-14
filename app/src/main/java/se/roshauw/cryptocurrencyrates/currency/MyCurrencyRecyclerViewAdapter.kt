@@ -41,14 +41,9 @@ class MyCurrencyRecyclerViewAdapter(private val mValues: List<DummyItem>, privat
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView
-        val mContentView: TextView
+        val mIdView: TextView = mView.findViewById(R.id.key) as TextView
+        val mContentView: TextView = mView.findViewById(R.id.content) as TextView
         var mItem: DummyItem? = null
-
-        init {
-            mIdView = mView.findViewById(R.id.key) as TextView
-            mContentView = mView.findViewById(R.id.content) as TextView
-        }
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"

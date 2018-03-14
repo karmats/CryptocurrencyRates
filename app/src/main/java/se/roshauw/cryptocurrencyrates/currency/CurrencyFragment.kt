@@ -33,13 +33,13 @@ class CurrencyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT)
+        if (arguments != null) {
+            mColumnCount = arguments.getInt(ARG_COLUMN_COUNT)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                     savedInstanceState: Bundle?): View {
+                              savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_currency_list, container, false)
 
         // Set the adapter
@@ -47,11 +47,11 @@ class CurrencyFragment : Fragment() {
             val context = view.getContext()
             val recyclerView = view as RecyclerView
             if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(LinearLayoutManager(context))
+                recyclerView.layoutManager = LinearLayoutManager(context)
             } else {
-                recyclerView.setLayoutManager(GridLayoutManager(context, mColumnCount))
+                recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            recyclerView.setAdapter(MyCurrencyRecyclerViewAdapter(DummyContent.ITEMS, mListener))
+            recyclerView.adapter = MyCurrencyRecyclerViewAdapter(DummyContent.ITEMS, mListener)
         }
         return view
     }
@@ -88,14 +88,14 @@ class CurrencyFragment : Fragment() {
     companion object {
 
         // TODO: Customize parameter argument names
-        private val ARG_COLUMN_COUNT = "column-count"
+        private const val ARG_COLUMN_COUNT = "column-count"
 
         // TODO: Customize parameter initialization
         fun newInstance(columnCount: Int): CurrencyFragment {
             val fragment = CurrencyFragment()
             val args = Bundle()
             args.putInt(ARG_COLUMN_COUNT, columnCount)
-            fragment.setArguments(args)
+            fragment.arguments = args
             return fragment
         }
     }
